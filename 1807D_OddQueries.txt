@@ -1,0 +1,92 @@
+import java.io.InputStream;
+import java.io.IOException;
+import java.io.PrintWriter;
+
+public class OddQueries{
+    public static void main(String[] args) throws IOException {
+        FastScanner sc = new FastScanner();
+        PrintWriter out = new PrintWriter(System.out);
+
+        int t = sc.nextInt();
+        while(t-- > 0){
+            int n = sc.nextInt();
+            int q = sc.nextInt();
+
+            long[] pref = new long[n + 1];
+            for (int i = 1; i <= n; i++) {
+                pref[i] = pref[i - 1] + sc.nextInt();
+            }
+            long totalSum = pref[n];
+            while (q-- > 0) {
+                int l = sc.nextInt();
+                int r = sc.nextInt();
+                long k = sc.nextLong();
+
+                long sumOutside = totalSum - (pref[r] - pref[l - 1]);
+                
+                long newSum = sumOutside + (r - l + 1) * k;
+
+                if (newSum % 2 != 0) {
+                    out.println("YES");
+                } else {
+                    out.println("NO");
+                }
+            }
+        }
+        out.flush();
+    }
+
+    static class FastScanner {
+        private final InputStream in = System.in;
+        private final byte[] buffer = new byte[32768];
+        private int head = 0;
+        private int tail = 0;
+
+        private int read() throws IOException {
+            if (head >= tail) {
+                head = 0;
+                tail = in.read(buffer, 0, buffer.length);
+                if (tail <= 0) return -1;
+            }
+            return buffer[head++];
+        }
+
+        public int nextInt() throws IOException {
+            int c = read();
+            while (c <= 32) {
+                if (c == -1) return -1;
+                c = read();
+            }
+            int sgn = 1;
+            if (c == '-') {
+                sgn = -1;
+                c = read();
+            }
+            int res = 0;
+            while (c >= '0' && c <= '9') {
+                res = res * 10 + c - '0';
+                c = read();
+            }
+            return res * sgn;
+        }
+
+        public long nextLong() throws IOException {
+            int c = read();
+            while (c <= 32) {
+                if (c == -1) return -1;
+                c = read();
+            }
+            int sgn = 1;
+            if (c == '-') {
+                sgn = -1;
+                c = read();
+            }
+            long res = 0;
+            while (c >= '0' && c <= '9') {
+                res = res * 10 + c - '0';
+                c = read();
+            }
+            return res * sgn;
+        }
+    }
+}
