@@ -1,0 +1,30 @@
+import java.util.Scanner;
+
+public class NITDestroystheUniverse{
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        if (!sc.hasNextInt()) return;
+        int t = sc.nextInt();
+        
+        while(t-- >0){
+            int n = sc.nextInt();
+            int nonZeroBlocks = 0;
+            boolean inBlock = false;
+            
+            for(int i=0; i<n; i++){
+                int val = sc.nextInt();
+                if(val != 0){
+                    if(!inBlock){
+                        nonZeroBlocks++;
+                        inBlock = true;
+                    }
+                } 
+                else{
+                    inBlock = false;
+                }
+            }            
+            System.out.println(Math.min(nonZeroBlocks, 2));
+        }
+        sc.close();
+    }
+}
