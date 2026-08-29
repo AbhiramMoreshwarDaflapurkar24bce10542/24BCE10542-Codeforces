@@ -1,0 +1,42 @@
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Scanner;
+
+public class ArrayCloningTechnique {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        
+        if (!sc.hasNextInt()) return;
+        int t = sc.nextInt();
+
+        while (t-- > 0) {
+            int n = sc.nextInt();
+            Map<Integer, Integer> freqMap = new HashMap<>();
+            int maxFreq = 0;
+
+            for (int i = 0; i < n; i++) {
+                int val = sc.nextInt();
+                int count = freqMap.getOrDefault(val, 0) + 1;
+                freqMap.put(val, count);
+                maxFreq = Math.max(maxFreq, count);
+            }
+
+            int operations = 0;
+            int count = maxFreq;
+
+            while (count < n) {
+                operations++; // 1 operation to clone
+                
+                int remaining = n - count;
+                int canCopy = Math.min(count, remaining);
+
+                operations += canCopy; // 1 operation per copy
+                count += canCopy;      // Update current count
+            }
+
+            System.out.println(operations);
+        }
+
+        sc.close();
+    }
+}
