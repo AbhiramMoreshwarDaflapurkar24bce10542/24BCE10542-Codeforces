@@ -1,0 +1,41 @@
+import java.util.Scanner;
+
+public class MakeAP{
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        
+        if (!sc.hasNextInt()) return;
+        int t = sc.nextInt();
+
+        while(t-->0){
+            long a = sc.nextLong();
+            long b = sc.nextLong();
+            long c = sc.nextLong();
+
+            boolean possible = false;
+            long targetA = 2 * b - c;
+            if(targetA > 0 && targetA % a == 0){
+                possible = true;
+            }
+            if(!possible && (a + c) % 2 == 0){
+                long targetB =(a+c)/2;
+                if(targetB > 0 && targetB % b == 0){
+                    possible = true;
+                }
+            }
+            if(!possible){
+                long targetC = 2 * b - a;
+                if(targetC > 0 && targetC % c == 0){
+                    possible = true;
+                }
+            }
+            if(possible){
+                System.out.println("YES");
+            } 
+            else{
+                System.out.println("NO");
+            }
+        }
+        sc.close();
+    }
+}
