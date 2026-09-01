@@ -1,0 +1,24 @@
+import java.util.Scanner;
+
+public class ABBalance {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        
+        if (!sc.hasNextInt()) return;
+        int t = sc.nextInt();
+        
+        while (t-- > 0) {
+            String s = sc.next();
+            char[] arr = s.toCharArray();
+            
+            // If the first and last characters don't match, make them match
+            if (arr[0] != arr[arr.length - 1]) {
+                arr[0] = arr[arr.length - 1];
+            }
+            
+            System.out.println(new String(arr));
+        }
+        
+        sc.close();
+    }
+}
