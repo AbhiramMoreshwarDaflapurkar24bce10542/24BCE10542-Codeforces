@@ -1,0 +1,31 @@
+import java.util.Scanner;
+
+public class LuntikandSubsequences {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        
+        if(sc.hasNextInt()){
+            int t = sc.nextInt(); 
+            while (t-- > 0) {
+                int n = sc.nextInt(); 
+                long countZeros = 0;
+                long countOnes = 0;
+                
+                for (int i = 0; i < n; i++) {
+                    int val = sc.nextInt();
+                    if (val == 0) {
+                        countZeros++;
+                    } 
+                    else if (val == 1) {
+                        countOnes++;
+                    }
+                }
+
+                long ans = countOnes * (1L << countZeros);
+                
+                System.out.println(ans);
+            }
+        }
+        sc.close();
+    }
+}
