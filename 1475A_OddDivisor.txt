@@ -1,0 +1,25 @@
+import java.util.Scanner;
+
+public class OddDivisor{
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        
+        if (!sc.hasNextInt()) return;
+        int t = sc.nextInt();
+        
+        StringBuilder out = new StringBuilder();
+        
+        while (t-->0) {
+            long n = sc.nextLong();
+            
+            if((n & (n-1)) == 0){
+                out.append("NO\n");
+            } 
+            else {
+                out.append("YES\n");
+            }
+        }
+        System.out.print(out);
+        sc.close();
+    }
+}
