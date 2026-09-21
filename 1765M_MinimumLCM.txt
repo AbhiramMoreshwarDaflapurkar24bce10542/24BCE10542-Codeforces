@@ -1,0 +1,65 @@
+import java.io.IOException;
+import java.io.InputStream;
+
+public class MinimumLCM{
+    public static void main(String[] args) throws IOException {
+        FastScanner scanner = new FastScanner(System.in);
+        StringBuilder output = new StringBuilder();
+        
+        int t = scanner.nextInt();
+        while (t-- > 0) {
+            int n = scanner.nextInt();
+            
+            int smallestDivisor = 1;
+            for (int i = 2; i * i <= n; i++) {
+                if (n % i == 0) {
+                    smallestDivisor = i;
+                    break;
+                }
+            }
+
+            int a = (smallestDivisor == 1) ? 1 : n / smallestDivisor;
+            int b = n - a;
+            
+            output.append(a).append(' ').append(b).append('\n');
+        }
+        
+        System.out.print(output);
+    }
+
+    static class FastScanner {
+        private final InputStream in;
+        private final byte[] buffer = new byte[1 << 16];
+        private int head = 0;
+        private int tail = 0;
+
+        public FastScanner(InputStream in) {
+            this.in = in;
+        }
+
+        private int read() throws IOException {
+            if (head >= tail) {
+                head = 0;
+                tail = in.read(buffer, 0, buffer.length);
+                if (tail <= 0) return -1;
+            }
+            return buffer[head++];
+        }
+
+        public int nextInt() throws IOException {
+            int c = read();
+            while (c <= ' ') {
+                if (c == -1) return -1;
+                c = read();
+            }
+            int res = 0;
+            while (c >= '0' && c <= '9') {
+                res = res * 10 + c - '0';
+                c = read();
+            }
+            return res;
+        }
+    }
+}
+//time complexity:O(sqrt(n))
+//spcae complexity:O(1)
