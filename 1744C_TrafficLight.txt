@@ -1,0 +1,57 @@
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.io.IOException;
+import java.util.StringTokenizer;
+
+public class TrafficLight{
+    public static void main(String[] args) throws IOException {
+        FastScanner fs = new FastScanner();
+        int t = fs.nextInt();
+        StringBuilder sb = new StringBuilder();
+        while (t-- >0){
+            int n = fs.nextInt();
+            char c = fs.next().charAt(0);
+            String s = fs.next();
+
+            if(c == 'g'){
+                sb.append(0).append("\n");
+                continue;
+            }
+
+            String doubleStr = s + s;
+            int lastGreenPos = -1;
+            int maxWaitTime = 0;
+            for (int i = 2*n-1; i >=0; i--) {
+                char currentChar = doubleStr.charAt(i);
+                if(currentChar == 'g'){
+                    lastGreenPos = i;
+                }
+                if(currentChar == c && lastGreenPos != -1 && i < n){
+                    maxWaitTime = Math.max(maxWaitTime, lastGreenPos - i);
+                }
+            }
+            sb.append(maxWaitTime).append("\n");
+        }
+        System.out.print(sb);
+    }
+    static class FastScanner{
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        StringTokenizer st;
+
+        String next(){
+            while(st == null || !st.hasMoreTokens()){
+                try{
+                    st = new StringTokenizer(br.readLine());
+                } 
+                catch(IOException e){
+                    e.printStackTrace();
+                }
+            }
+            return st.nextToken();
+        }
+
+        int nextInt(){
+            return Integer.parseInt(next());
+        }
+    }
+}
